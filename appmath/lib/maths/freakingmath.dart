@@ -16,7 +16,7 @@ class freaking extends StatefulWidget {
 class _freakingState extends State<freaking> {
   int status = 0;
 
-  //0: home, 1: play, 2: gameover, 3: more
+  //0: home, 1: play, 2: end
   int score = 0;
   int best_core = 0;
   int time = 15;
