@@ -37,23 +37,87 @@ class _freakingState extends State<freaking> {
       ) ;
   }
 
-  Container PlayScreen(){
+  
+Container StartScreen(){
+  return Container(
+       width: double.infinity,
+       height: double.infinity,
+       color: Color.fromARGB(255, 238, 34, 207),
+       child: Column(
+         
+        children: [
+          SizedBox(
+            height: 150,
+          ),
+         Text("Freaking Math",
+                style:TextStyle(color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 40),
+         ),
+         SizedBox(
+                height:100 ,
+         ),
+         TextButton(
+              onPressed: (){
+                status = 1;
+                score=0;
+                _creatExpression();
+                time=15;
+                _timer();
+                setState(() {
+                });  
+              },
+              child: Text("Start",
+              style: TextStyle(color: Colors.pink,
+              fontWeight: FontWeight.bold,fontSize: 30),
+              ),
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.all(30),
+                backgroundColor: Colors.white,
+                
+              ),
+              
+            
+       ),
+       SizedBox(
+        height: 80,
+       ),
+       Container(
+          width: 120,
+          height: 90,
+          alignment: Alignment.center,
+          child: Text("Other",
+          style: TextStyle(color: Colors.pink,
+          fontWeight: FontWeight.bold,fontSize: 30),
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(3),
+          ),
+       )
+       ]
+     ),  
+      );
+}
+
+Container PlayScreen(){
     return Container(
       width: double.infinity,
       height: double.infinity,
       color: Colors.blue,
       child: Column(
          mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
+         crossAxisAlignment: CrossAxisAlignment.center,
          children: [
-          Row(mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width*time/15,
-              height: 10,
-              color: Color.fromARGB(255, 245, 177, 177),
-            )
-          ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width * time / 15,
+                height: 15,
+                color: Color.fromARGB(255, 253, 156, 11),
+              )
+            ],
           ),
           SizedBox(
             height: 40,
@@ -61,17 +125,20 @@ class _freakingState extends State<freaking> {
           Text('$score',
           style: TextStyle(color: Colors.white,
           fontWeight: FontWeight.bold,
-          fontSize: 30),
+          fontSize: 40),
           ),
           SizedBox(
             height: 80,
           ),
           Text('$p1 $operator $p2 = $ans',
           style: TextStyle(
-            fontSize: 30,
+            fontSize: 70,
             fontWeight: FontWeight.bold,
             color: Colors.white
           ),
+          ),
+           SizedBox(
+            height: 200,
           ),
 
           Row(
@@ -80,8 +147,8 @@ class _freakingState extends State<freaking> {
             children: [
              Expanded(child: 
               Container(
-                width: MediaQuery.of(context).size.width/3,
-                height:MediaQuery.of(context).size.height/6,
+                width: MediaQuery.of(context).size.width/2,
+                height:MediaQuery.of(context).size.height/3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
@@ -91,20 +158,24 @@ class _freakingState extends State<freaking> {
                   onPressed:(){
                     if(ans==correctAns){
                       score++;
-                      creatExpression();
+                      _creatExpression();
                       time=15;
+                      _timer();
                     }else{
                       status = 2;
                     }
                     setState(() {
                     });
                   } ,
-                  child: Icon(Icons.check,
-                  size: 35,
+                  child: Icon(Icons.check,size: 100,
                   color: Colors.green,),
                 ),
               ),
              ),
+             SizedBox(
+              width: 20,
+             ),
+             
              
                 Expanded(
                   child:Row(
@@ -113,8 +184,8 @@ class _freakingState extends State<freaking> {
                     children: [
                       Expanded(child: 
                       Container(
-                        width: MediaQuery.of(context).size.width/3,
-                        height:MediaQuery.of(context).size.height/6,
+                        width: MediaQuery.of(context).size.width/2,
+                        height:MediaQuery.of(context).size.height/3,
                         decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.white,
@@ -123,8 +194,9 @@ class _freakingState extends State<freaking> {
                                 onPressed:(){
                                   if(ans!=correctAns){
                                     score+=1;
-                                    creatExpression();
+                                    _creatExpression();
                                     time=15;
+                                    _timer();
                                   }else{
                                     status = 2;
                                   }
@@ -132,7 +204,7 @@ class _freakingState extends State<freaking> {
                                   });
                                 } ,
                                 child: Icon(Icons.clear,
-                                size: 50,
+                                size: 100,
                                 color: Colors.red,),
                         ),
                   ),
@@ -147,71 +219,24 @@ class _freakingState extends State<freaking> {
     );
   }
 
-Container StartScreen(){
-  return Container(
-       width: double.infinity,
-       height: double.infinity,
-       color: Color.fromARGB(255, 238, 34, 207),
-       child: Column(
-         
-        children: [
-          SizedBox(
-            height: 100,
-          ),
-         Text("Freaking Math",
-                style:TextStyle(color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 40),
-         ),
-         SizedBox(
-                height:200 ,
-         ),
-         TextButton(
-              onPressed: (){
-                status = 1;
-                score=0;
-                creatExpression();
-                time=15;
-                setState(() {
-                });  
-              },
-              child: Text("Start",
-              style: TextStyle(color: Colors.pink,
-              fontWeight: FontWeight.bold,fontSize: 30),
-              ),
-       ),
-       SizedBox(
-        height: 120,
-       ),
-       Container(
-          width: 150,
-          height: 80,
-          alignment: Alignment.center,
-          child: Text("Play",
-          style: TextStyle(color: Colors.pink,
-          fontWeight: FontWeight.bold,fontSize: 30),
-          ),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-          ),
-       )
-       ]
-     ),  
-      );
-}
 
 Container GameOver(){
   if(best_core<score){
     best_core=score;
   }
   return Container(
-    color:Colors.green,
+    color:Colors.purple,
     width: double.infinity,
     height: double.infinity,
+
     child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+         mainAxisAlignment: MainAxisAlignment.start,
+         crossAxisAlignment: CrossAxisAlignment.center,
+         
       children: [
+        SizedBox(
+          height: 100,
+        ),
         Text("Game Over",
         style: TextStyle(
           fontSize: 30,
@@ -233,16 +258,16 @@ Container GameOver(){
       ),
       ),
       SizedBox(
-        height: 10,
+        height: 30,
       ),
       Container(
-        margin: EdgeInsets.symmetric(horizontal: 100),
+        margin: EdgeInsets.symmetric(horizontal: 80),
         child: Row(
           children: [
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.fromLTRB(40, 20, 40, 20),
               ),
               onPressed:(){
                 status=1;
@@ -251,10 +276,13 @@ Container GameOver(){
                 setState(() {});
               }, child:Icon(Icons.cached_sharp),
               ),
+              SizedBox(
+                width: 10,
+              ),
                TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.fromLTRB(40, 20, 40, 20),
               ),
               onPressed:(){
                 status=0;
@@ -263,21 +291,49 @@ Container GameOver(){
                 setState(() {});
               }, child:Icon(Icons.home),
               ),
-        ]
-        ),
-      )
-    
-
-
-    ]
+            ]
+         ),
+       ),
+       SizedBox(
+        height: 250,
+       ),
+       Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              width: 180,
+              height: 200,
+              color: Colors.white,
+              child: IconButton(
+                onPressed: (){},
+                icon: Icon(Icons.check),
+                color: Colors.green,
+                iconSize: 100,
+              ),
+            ),
+            Container(
+              width: 180,
+              height: 200,
+              color: Colors.white,
+              child: IconButton(
+                onPressed: (){},
+                icon: Icon(Icons.clear),
+                color: Colors.red,
+                iconSize: 100,
+                
+              ),
+            ),
+        ]),
+       )
+     ]
     ),
-
   );
 }
 
-creatExpression(){
-  p1=Random().nextInt(10)+1;
-  p2=Random().nextInt(10)+2;
+_creatExpression(){
+  p1=Random().nextInt(20)+1;
+  p2=Random().nextInt(20)+2;
   operator= listOperator[rd.nextInt(listOperator.length)];
   switch(operator){
     case '+':
@@ -295,6 +351,22 @@ creatExpression(){
   }
   ans=correctAns + Random().nextInt(2)-1;
   }
+
+  _timer() {
+    // ignore: unnecessary_new
+    timer = new Timer.periodic(
+      const Duration(seconds: 1),
+      (Timer timer) {
+        time -= 1;
+        if (time <= 0) {
+          timer.cancel();
+          status = 2;
+        }
+        setState(() {});
+      },
+    );
+  }
+
 
 }
 
